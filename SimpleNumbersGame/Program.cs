@@ -15,7 +15,7 @@ namespace NumbersGame
                 switch (choice)
                 {
                     case 1:
-                        gamePlay(1, 20, 10, "lätt");
+                        gamePlay(1, 20, 10, "att spela, du får svårigheten lätt");
                         break;
                     case 2:
                         difficulty();
@@ -33,7 +33,7 @@ namespace NumbersGame
         }
         static void printMenu()
         {
-            Console.WriteLine("-----Meny-----");
+            Console.WriteLine("-------MENY-------");
             Console.WriteLine("[1] Spela");
             Console.WriteLine("[2] Svårighetsgrad");
             Console.WriteLine("[3] Avsluta");
@@ -43,7 +43,7 @@ namespace NumbersGame
             Console.WriteLine("--Välj Svårighetsgrad--");
             Console.WriteLine("[1] Lätt");
             Console.WriteLine("[2] Medium");
-            Console.WriteLine("[3] Jättesvår");
+            Console.WriteLine("[3] Extremt Svår");
             int difficultyChoice = validInput(1, 3);
             switch (difficultyChoice)
             {
@@ -71,13 +71,14 @@ namespace NumbersGame
             while (playAgain)
             {
                 Console.Clear();
-                Console.WriteLine($"Du valde {difficulty}.");
-
+                Console.WriteLine($"Välkommen! Du valde {difficulty}.");
+                Console.WriteLine($"Jag tänker på ett nummer. Kan du gissa vilket? du får {guesses} gissningar.");
+                Console.WriteLine("");
                 guess = 0;
                 number = random.Next(min, max);
                 while (!(guess == number || guesses == 0))
                 {
-                    Console.WriteLine($"Du har {guesses} gissningar kvar.");
+
                     guess = validInput(min, max);
                     Console.WriteLine("Gissning: " + guess);
                     Console.Clear();
@@ -85,34 +86,38 @@ namespace NumbersGame
                     {
                         if (guess - number < 5)
                         {
-                            Console.WriteLine("Du gissade lite för högt");
+                            Console.WriteLine($"Du gissade {guess}, vilket är lite för högt.");
                         }
                         else
                         {
-                            Console.WriteLine("Du gissade väldigt högt");
+                            Console.WriteLine($"Du gissade {guess}, vilket är väldigt högt.");
                         }
                     }
                     else
                     {
                         if (number - guess < 5)
                         {
-                            Console.WriteLine("Du gissade lite för lågt");
+                            Console.WriteLine($"Du gissade {guess}, vilket är lite för lågt.");
                         }
                         else
                         {
-                            Console.WriteLine("Du gissade väldigt lågt");
+                            Console.WriteLine($"Du gissade {guess}, vilket är väldigt lågt.");
                         }
                     }
+                    Console.WriteLine($"Du har {guesses} gissningar kvar.");
+                    Console.WriteLine("");
                     guesses--;
                 }
                 if (guess == number)
                 {
+                    Console.Clear();
                     Console.WriteLine("Du vann, rätt svar var: " + number);
                     Console.ReadKey();
                     return;
                 }
                 else
                 {
+                    Console.Clear();
                     Console.WriteLine("Du förlorade, rätt svar var: " + number);
                     Console.ReadKey();
                     return;
